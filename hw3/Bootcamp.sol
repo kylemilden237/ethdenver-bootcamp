@@ -24,7 +24,7 @@ contract BootcampContract {
 
 
     function getDeployer() external view returns(address) {
-        if(msg.sender != deployer) {
+        if(msg.sender == deployer) {
             return 0x000000000000000000000000000000000000dEaD;
         } else {
             return deployer;
