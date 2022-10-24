@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: UNLICENSED
 
+import "@openzeppelin/contracts/access/Ownable.sol";
+
 pragma solidity ^0.8.0;
 
-contract VolcanoCoin {
+contract VolcanoCoin is Ownable {
 
     uint256 totalSupply = 10000;
     address owner;
@@ -18,14 +20,7 @@ contract VolcanoCoin {
     }
 
     constructor() {
-        owner = msg.sender;
         balances[owner] = 10000;
-    }
-
-    modifier ownerOnly() {
-        if(msg.sender == owner) {
-            _;
-        }
     }
 
     function increaseTotalSupply() public ownerOnly {
