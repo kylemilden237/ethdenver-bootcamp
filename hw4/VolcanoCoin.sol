@@ -7,7 +7,6 @@ pragma solidity ^0.8.0;
 contract VolcanoCoin is Ownable {
 
     uint256 totalSupply = 10000;
-    address owner;
     mapping(address => uint256) balances;
     mapping(address => Payment[]) payments;
 
@@ -20,16 +19,16 @@ contract VolcanoCoin is Ownable {
     }
 
     constructor() {
-        balances[owner] = 10000;
+        balances[owner()] = 10000;
     }
 
-    function increaseTotalSupply() public ownerOnly {
+    function increaseTotalSupply() external onlyOwner {
         totalSupply += 1000;
-        balances[owner] += 1000;
+        balances[owner()] += 1000;
         emit supplyChange(totalSupply);
     }
 
-    function transferCoins(address receiver, uint256 amount) public {
+    function transferCoins(address receiver, uint256 amount) external {
         assert(amount > 0);
         require(balances[msg.sender] >= amount, "Sender does not have enough balance.");
         balances[msg.sender] -= amount;
@@ -38,15 +37,15 @@ contract VolcanoCoin is Ownable {
         emit transfer(amount, receiver);
     }
 
-    function getTotalSupply() public view returns(uint256) {
+    function getTotalSupply() external view returns(uint256) {
         return totalSupply;
     }
 
-    function getBalance(address addr) public view returns(uint256) {
+    function getBalance(address addr) external view returns(uint256) {
         return balances[addr];
     }
 
-    function getPayments(address addr) public view returns(Payment[] memory) {
+    function getPayments(address addr) external view returns(Payment[] memory) {
         return payments[addr];
     }
 
