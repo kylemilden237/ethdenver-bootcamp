@@ -33,7 +33,7 @@ contract VolcanoCoin is Ownable {
         require(balances[msg.sender] >= amount, "Sender does not have enough balance.");
         balances[msg.sender] -= amount;
         balances[receiver] += amount;
-        payments[msg.sender].push(Payment(amount, receiver));
+        recordPayment(msg.sender, receiver, amount);
         emit transfer(amount, receiver);
     }
 
@@ -47,6 +47,10 @@ contract VolcanoCoin is Ownable {
 
     function getPayments(address addr) external view returns(Payment[] memory) {
         return payments[addr];
+    }
+
+    function recordPayment(address sender, address receiver, uint256 amount) private {
+        payments[sender].push(Payment(amount, receiver));
     }
 
 }
