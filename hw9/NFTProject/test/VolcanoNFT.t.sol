@@ -5,20 +5,29 @@ import "forge-std/Test.sol";
 import "../src/VolcanoNFT.sol";
 
 contract VolcanoNFTTest is Test {
-    VolcanoNFT public counter;
+    VolcanoNFT public volcanoNft;
 
     function setUp() public {
-        counter = new VolcanoNFT();
-        counter.setNumber(0);
+        volcanoNft = new VolcanoNFT();
     }
 
-    function testIncrement() public {
-        counter.increment();
-        assertEq(counter.number(), 1);
+    function testMint() public {
+        vm.prank(address(1));
+        volcanoNft.mint();
+        assertEq(volcanoNft.getTotalSupply(), 1);
+        assertEq(volcanoNft.ownerOf(1), address(1));
     }
 
-    function testSetNumber(uint256 x) public {
-        counter.setNumber(x);
-        assertEq(counter.number(), x);
+    function testTransfer() public {
+        vm.prank(address(1));
+        volcanoNft.mint();
+        assertEq(volcanoNft.getTotalSupply(), 1);
+        assertEq(volcanoNft.ownerOf(1), address(1));
+
+        vm.prank(address(1));
+        volcanoNft.safeTransferFrom(address(1), address(2), 1);
+        assertEq(volcanoNft.ownerOf(1), address(2));
+        assertEq(volcanoNft.balanceOf(address(1)), 0);
+        assertEq(volcanoNft.balanceOf(address(2)), 1);
     }
 }
