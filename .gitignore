@@ -1,5 +1,12 @@
 .DS_Store
 .gitmodules
+.vscode
+
+package-lock.json
+
 **/lib/**
 **/cache/**
 **/out/**
+**/artifacts/**
+**/node_modules/**
+**/deployments/**
