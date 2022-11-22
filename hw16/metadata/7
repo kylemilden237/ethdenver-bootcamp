@@ -1,0 +1,19 @@
+{
+  "name": "Cat #7",
+  "description": "Cat Description",
+  "image": "https://ipfs.io/ipfs/QmYrxAviWHGugdikgU1Awc8MRtfqxMYYRmBuCTMEc5mCAx",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Blue"
+    },
+    {
+      "trait_type": "Character",
+      "value": "Cat"
+    },
+    {
+      "trait_type": "Effect",
+      "value": "Standard"
+    }
+  ]
+}
